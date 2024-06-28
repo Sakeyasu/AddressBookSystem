@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.ico" id="favicon">
+<title th:text="#{title.entry}">タイトル</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+<!-- <link rel="stylesheet" type="text/css" href="../asobi.css"> -->
+<style type="text/css">
+	body {
+	    font-family: Arial, sans-serif;
+	    background-color: #f4f4f4;
+	    color: #333;
+	    margin: 0;
+	    padding: 0;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    height: 80vh;
+	}
+	.container {
+	    text-align: center;
+	}
+	h2 {
+	    font-size: 1.8em;
+	    color: #333;
+	    margin-bottom: 20px;
+	}
+	form {
+	    background: #fff;
+	    padding: 30px;
+	    border: 1px solid #ddd;
+	    border-radius: 4px;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	    display: inline-block;
+	}
+	input[type="submit"] {
+	    background: #007bff;
+	    color: #fff;
+	    border: none;
+	    padding: 10px 15px;
+	    margin: 5px;
+	    border-radius: 3px;
+	    cursor: pointer;
+	    display: inline-block;
+	}
+	input[type="submit"]:hover {
+	    background: #0056b3;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h2>住所録システム</h2>
+		<form th:action="@{/menu}" method="post">
+			<input type="submit" value="一覧表示" name="select">
+			<input type="submit" value="登録" name="insert">
+			<input type="submit" value="更新" name="update">
+			<input type="submit" value="削除" name="delete">
+		</form>
+	</div>
+</body>
+</html>

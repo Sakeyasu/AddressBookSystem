@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title.entry}">タイトル</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container {
+        width: 55%;
+        max-width: 700px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .header {
+        margin-bottom: 20px;
+    }
+    .header h2 {
+        margin: 0;
+    }
+    .messages {
+        text-align: left;
+        margin: 20px 0;
+        display: inline-block;
+    }
+    input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background: #0056b3;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+        <div class="header">
+            <h2>ユーザ更新</h2>
+            <h2><small>以下の通り更新が完了しました。</small></h2>
+        </div>
+		<div class="messages">
+			名前　　　　：[[${userForm.name}]]
+			<br />
+			誕生日　　　：[[${userForm.birth}]]
+			<br />
+			電話番号　　：[[${userForm.tel}]]
+			<br />
+			メール　　　：[[${userForm.mail}]]
+			<br />
+			郵便番号　　：[[${userForm.post_num}]]
+			<br />
+			都道府県　　：[[${userForm.pref}]]
+			<br />
+			市町村　　　：[[${userForm.city_town}]]
+			<br />
+			番地・建物名：[[${userForm.st_num}]]
+		</div>
+		<br />
+		<br />
+		<form th:action="@{/usermng}" method="get">
+			<input type="submit" value="メニューに戻る">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title.entry}">タイトル</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container {
+        width: 60%;
+        max-width: 700px;
+        margin: auto;
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .header h2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        text-align: center;
+    }
+    .back input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .back input[type="submit"]:hover {
+        background: #0056b3;
+    }
+    .center-content {
+        text-align: center;
+    }
+    .messages {
+        margin-bottom: 20px;
+        text-align: left;
+        display: inline-block;
+    }
+    .center-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    form input[type="submit"]:hover {
+        background: #0056b3;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <form th:action="@{/menu}" method="post">
+            <!-- ココ -->
+            <input type="hidden" name="update" value="true">
+                <input type="hidden" id="pref" name="pref" th:value="${userForm.pref}" />
+                <span class="back"><input type="submit" name="back" value="キャンセル"></span>
+            </form>
+            <h2>ユーザ更新</h2>
+        </div>
+        <div class="center-content">
+            <h2><small>以下の内容で更新してもよろしいですか</small></h2>
+        </div>
+        <div class="messages">
+            名前　　　　：[[${userForm.name}]]
+            <br />
+            誕生日　　　：[[${userForm.birth}]]
+            <br />
+            電話番号　　：[[${userForm.tel}]]
+            <br />
+            メール　　　：[[${userForm.mail}]]
+            <br />
+            郵便番号　　：[[${userForm.post_num}]]
+            <br />
+            都道府県　　：[[${userForm.pref}]]
+            <br />
+            市町村　　　：[[${userForm.city_town}]]
+            <br />
+            番地・建物名：[[${userForm.st_num}]]
+            <br />
+        </div>
+        <form th:action="updtcomplete" method="post" class="center-form">
+            <input type="submit" value="更新実行" name="update" />
+        </form>
+    </div>
+</body>
+</html>

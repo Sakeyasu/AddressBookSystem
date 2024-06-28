@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title.entry}">タイトル</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container {
+        width: 60%;
+        max-width: 700px;
+        min-height: 400px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .header {
+        margin-bottom: 20px;
+    }
+    .header h2 {
+        margin: 0;
+    }
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+    }
+    input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background: #0056b3;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+        <div class="header">
+			<h2>ユーザ削除</h2>
+			<br><br>
+			<h2><small>削除が完了しました。</small></h2>
+		</div>
+		<form th:action="@{/usermng}" method="get" class="center">
+			<input type="submit" value="メニューに戻る">
+		</form>
+	</div>
+</body>
+</html>

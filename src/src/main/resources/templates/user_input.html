@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title.entry}">タイトル</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style type="text/css">
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        height: 100%;
+        margin: 0;
+        padding: 20px;
+        /* padding-top: 50px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        width: 43%;
+        max-width: 500px;
+        min-width: 420px;
+        margin: auto;
+        text-align: center;
+		align-items: center;
+        background-color: #fff;
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .header h2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+    .back {
+        position: absolute;
+        text-align: left;
+    }
+    form {
+        width: 100%;
+        margin: 0;
+    }
+    .form-text{
+        width: 100%;
+        padding: 50px;
+        text-align: left;
+    }
+    .back input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .back input[type="submit"]:hover {
+        background: #0056b3;
+    }
+    form th {
+        text-align: left;
+        padding-right: 10px;
+    }
+    form input[type="text"],
+    form input[type="date"],
+    form input[type="tel"] {
+    	width: calc(80% - 150px);
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    form select {
+        width: calc(80% - 132px);
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    form .go input[type="submit"] {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    form .go input[type="submit"]:hover {
+        background: #0056b3;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 50px;
+        margin-bottom: 0;
+    }
+    .messages {
+        /* エラーメッセージの左右位置調整 */
+        /* padding-left: 80px; */
+        text-align: right;
+    }
+    ul h3 {
+        color: red;
+    }
+    ul .messages {
+        display: inline-block;
+        text-align: left;
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <form th:action="@{/usermng}" method="get" class="back">
+                <input type="submit" value="戻る">
+            </form>
+            <h2>ユーザ登録</h2>
+        </div>
+        <form th:action="@{/confirm}" method="post" th:object="${userForm}">
+            <!-- エラーを表示する -->
+            <ul th:if="${#fields.hasErrors('*')}">
+                <h3>️⚠︎エラー</h3>
+                <div class="messages">
+                    <small><li th:each="err:${#fields.errors('*')}" th:text="${err}"></li></small>
+                </div>
+            </ul>
+            <div class="form-text">
+                名前　　　　：<input type="text" name="name"  th:value="${userForm.name}">
+                <br />
+                誕生日　　　：<input type="date" name="birth" placeholder="例：2002-04-23（半角）" th:value="${userForm.birth}">
+                <br />
+                電話番号　　：<input type="tel" name="tel" placeholder="携帯･固定電話 (半角･ﾊｲﾌﾝあり)" th:value="${userForm.tel}">
+                <br />
+                メール　　　：<input type="text" name="mail" th:value="${userForm.mail}">
+                <br />
+                郵便番号　　：<input type="tel" name="post_num" placeholder="例：842-1234 (半角･ﾊｲﾌﾝあり)" th:value="${userForm.post_num}">
+                <br />
+                都道府県　　：<select id="pref" name="pref"  th:value="${userForm.pref}">
+                            <option value="">選択してください</option>
+                            <optgroup label="北海道">
+                                <option value="北海道">北海道</option>
+                            </optgroup>
+                            <optgroup label="東北">
+                                <option value="青森県">青森県</option>
+                                <option value="岩手県">岩手県</option>
+                                <option value="宮城県">宮城県</option>
+                                <option value="秋田県">秋田県</option>
+                                <option value="山形県">山形県</option>
+                                <option value="福島県">福島県</option>
+                            </optgroup>
+                            <optgroup label="関東">
+                                <option value="茨城県">茨城県</option>
+                                <option value="栃木県">栃木県</option>
+                                <option value="群馬県">群馬県</option>
+                                <option value="埼玉県">埼玉県</option>
+                                <option value="千葉県">千葉県</option>
+                                <option value="東京都">東京都</option>
+                                <option value="神奈川県">神奈川県</option>
+                            </optgroup>
+                            <optgroup label="中部">
+                                <option value="新潟県">新潟県</option>
+                                <option value="富山県">富山県</option>
+                                <option value="石川県">石川県</option>
+                                <option value="福井県">福井県</option>
+                                <option value="山梨県">山梨県</option>
+                                <option value="長野県">長野県</option>
+                                <option value="岐阜県">岐阜県</option>
+                                <option value="静岡県">静岡県</option>
+                                <option value="愛知県">愛知県</option>
+                            </optgroup>
+                            <optgroup label="近畿">
+                                <option value="三重県">三重県</option>
+                                <option value="滋賀県">滋賀県</option>
+                                <option value="京都府">京都府</option>
+                                <option value="大阪府">大阪府</option>
+                                <option value="兵庫県">兵庫県</option>
+                                <option value="奈良県">奈良県</option>
+                                <option value="和歌山県">和歌山県</option>
+                            </optgroup>
+                            <optgroup label="中国">
+                                <option value="鳥取県">鳥取県</option>
+                                <option value="島根県">島根県</option>
+                                <option value="岡山県">岡山県</option>
+                                <option value="広島県">広島県</option>
+                                <option value="山口県">山口県</option>
+                            </optgroup>
+                            <optgroup label="四国">
+                                <option value="徳島県">徳島県</option>
+                                <option value="香川県">香川県</option>
+                                <option value="愛媛県">愛媛県</option>
+                                <option value="高知県">高知県</option>
+                            </optgroup>
+                            <optgroup label="九州">
+                                <option value="福岡県">福岡県</option>
+                                <option value="佐賀県">佐賀県</option>
+                                <option value="長崎県">長崎県</option>
+                                <option value="熊本県">熊本県</option>
+                                <option value="大分県">大分県</option>
+                                <option value="宮崎県">宮崎県</option>
+                                <option value="鹿児島県">鹿児島県</option>
+                                <option value="沖縄県">沖縄県</option>
+                            </optgroup>
+                        </select>
+                <br />
+                市町村　　　：<input type="text" name="city_town"  th:value="${userForm.city_town}">
+                <br />
+                番地・建物名：<input type="text" name="st_num"  th:value="${userForm.st_num}">
+                <br />
+                <br />
+            </div>
+
+            <div class="go">
+                <input type="submit" value="登録確認画面へ">
+            </div>
+        </form>
+    </div>
+    <script>
+    /* window.onload = function() {
+        var prefValue = document.querySelector("input[name='pref']").value;
+        if (prefValue) {
+            document.getElementById("pref").value = prefValue;
+        }
+    }; */
+    </script>
+</body>
+</html>
